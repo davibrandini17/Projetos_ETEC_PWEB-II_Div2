@@ -1,11 +1,42 @@
 <?php
-//declaração de atributos(mesma coisa que variáveis)
-$imagem = "midias/163549-1600-1600.webp";
-$titulo = "Notebook VAIO FE16";
-$resumo = "Notebook VAIO FE16 AMD® Ryzen 7-5825U Linux 8GB RAM 512GB SSD 16' IPS WUXGA Antirreflexo - Cinza Grafite";
-$valor = 3399.98;
-$quantidade = 5;
-$i = 1;
+/*
+mesma coisa que o uses do Delphi ou Lazarus (ALT+F11)
+*/
+require './controle/conexao.php';
+/*
+FDQuery do Delphi ou ZQuery do Lazarus
+Conectamos a Query
+*/
+$pdo = Conexao::conectar();
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$sqlpro = 
+"
+select 
+    proid,
+    pronome,
+    prodescricao,
+    provalorcusto,
+    provalorvenda,
+    proquantidade,
+    prosubid,
+    subnome,
+    subcatid,
+    catnome,
+    proativo
+from
+    produtos,
+    subcategorias,
+    categorias
+where
+    prosubid = subid
+and
+    subcatid = catid
+";
+$prppro = $pdo->prepare($sqlpro);
+$prppro->execute();
+while($dspro = $prppro->fetch(PDO::FETCH_ASSOC)){
+  echo $dspro['pronome'].'<br>';
+}
 ?>
 <!doctype html>
 <html lang="pt-BR">

@@ -1,14 +1,5 @@
 <?php
-/*
-mesma coisa que o uses do Delphi ou Lazarus (ALT+F11)
-*/
-require './controle/conexao.php';
-/*
-FDQuery do Delphi ou ZQuery do Lazarus
-Conectamos a Query
-*/
-$pdo = Conexao::conectar();
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 $sql = "select * from categorias;";/*propriedade sql da query do Delphi / Lazarus*/
 $prp = $pdo->prepare($sql);/*seria o principio lógico de preparação para o execsql ou open da query no Delphi / Lazarus*/
 $prp->execute();/*execsql ou open da query no Delphi / Lazarus*/
